@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+# better-crontab - A safer wrapper for crontab command
+# 
+# This script prevents accidental deletion of crontab entries
+# by adding confirmation prompts for dangerous operations.
+#
+
+# Store the real crontab path
+# Try multiple methods for finding the real crontab (for portability)
+if command -v which >/dev/null 2>&1; then
+    REAL_CRONTAB=$(which -a crontab 2>/dev/null | grep -v "$(dirname "$0")" | head -1)
+fi
+
+# If not found, try command -v
+if [ -z "$REAL_CRONTAB" ]; then
+    REAL_CRONTAB=$(command -v crontab 2>/dev/null)
+fi
+
+# If still not found, try standard paths
+if [ -z "$REAL_CRONTAB" ]; then
+    if [ -x "/usr/bin/crontab" ]; then
+        REAL_CRONTAB="/usr/bin/crontab"
+    elif [ -x "/bin/crontab" ]; then
+        REAL_CRONTAB="/bin/crontab"
+    else
+        echo "錯誤: 無法找到系統的 crontab 命令" >&2
+        exit 1
+    fi
+fi
+
+# Function to show confirmation prompt
+confirm() {
+    local prompt="$1"
+    local response
+    
+    echo -n "$prompt (yes/no): " >&2
+    read -r response
+    
+    case "$response" in
+        [yY]|[yY][eE][sS]|是)
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+# Parse arguments to detect dangerous operations
+NEEDS_CONFIRM=0
+OPERATION=""
+
+# Check for -r or --remove flag
+for arg in "$@"; do
+    case "$arg" in
+        -r|--remove)
+            NEEDS_CONFIRM=1
+            OPERATION="remove"
+            break
+            ;;
+    esac
+done
+
+# If it's a remove operation, ask for confirmation
+if [ $NEEDS_CONFIRM -eq 1 ]; then
+    if [ "$OPERATION" = "remove" ]; then
+        echo "⚠️  警告: 您即將刪除整個 crontab 排程！" >&2
+        echo "這個操作將會清除所有的 cron 工作。" >&2
+        echo "" >&2
+        
+        if ! confirm "確定要刪除嗎？"; then
+            echo "操作已取消。" >&2
+            exit 0
+        fi
+    fi
+fi
+
+# Execute the real crontab command
+exec "$REAL_CRONTAB" "$@"
