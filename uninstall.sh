@@ -66,15 +66,18 @@ SHELL_CONFIGS=(
 )
 
 for config in "${SHELL_CONFIGS[@]}"; do
-    if [ -f "$config" ] && grep -q "alias crontab=.*better-crontab" "$config"; then
-        echo "在 $config 中找到 alias"
+    if [ -f "$config" ] && (grep -q 'alias crontab=".*better-crontab"' "$config" || \
+                            grep -q "alias crontab='.*better-crontab'" "$config"); then
+        echo "在 $config 中找到 better-crontab alias"
         read -p "是否移除？ (y/n): " remove_alias
         if [[ "$remove_alias" =~ ^[Yy]$ ]]; then
             # Backup the config file
             cp "$config" "$config.bak"
-            # Remove the alias and the comment line before it (portable approach)
-            grep -v "# better-crontab alias" "$config.bak" | grep -v "alias crontab=.*better-crontab" > "$config"
-            echo -e "${GREEN}✓${NC} 已從 $config 移除 alias (備份: $config.bak)"
+            # Remove only the better-crontab alias and its comment (portable approach)
+            grep -v '# better-crontab alias' "$config.bak" | \
+                grep -v 'alias crontab=".*better-crontab"' | \
+                grep -v "alias crontab='.*better-crontab'" > "$config"
+            echo -e "${GREEN}✓${NC} 已從 $config 移除 better-crontab alias (備份: $config.bak)"
         else
             echo "保留 $config 中的 alias"
         fi

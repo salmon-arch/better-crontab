@@ -87,13 +87,16 @@ if [[ "$add_alias" =~ ^[Yy]$ ]]; then
     fi
     
     # Check if alias already exists
-    if grep -q "alias crontab=" "$SHELL_CONFIG" 2>/dev/null; then
-        echo -e "${YELLOW}!${NC} 警告：alias 已存在於 $SHELL_CONFIG"
+    if grep -q 'alias crontab=".*better-crontab"' "$SHELL_CONFIG" 2>/dev/null || \
+       grep -q "alias crontab='.*better-crontab'" "$SHELL_CONFIG" 2>/dev/null; then
+        echo -e "${YELLOW}!${NC} 警告：better-crontab alias 已存在於 $SHELL_CONFIG"
         read -p "是否覆蓋？ (y/n): " overwrite
         if [[ "$overwrite" =~ ^[Yy]$ ]]; then
-            # Remove old alias (portable sed syntax)
+            # Remove old better-crontab alias (portable approach)
             cp "$SHELL_CONFIG" "$SHELL_CONFIG.bak"
-            grep -v "alias crontab=" "$SHELL_CONFIG.bak" > "$SHELL_CONFIG"
+            grep -v '# better-crontab alias' "$SHELL_CONFIG.bak" | \
+                grep -v 'alias crontab=".*better-crontab"' | \
+                grep -v "alias crontab='.*better-crontab'" > "$SHELL_CONFIG"
         else
             echo "跳過 alias 設定"
             add_alias="n"
